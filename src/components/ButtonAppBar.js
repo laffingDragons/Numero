@@ -10,7 +10,7 @@ import '../App.css';
 import SideDrawer from './SideDrawer';
 import dayjs from 'dayjs';
 
-export default function ButtonAppBar({sideDraweOpen, setSideDraweOpen, userInfo}) {
+export default function ButtonAppBar({sideDraweOpen, setSideDraweOpen, userInfo, setOpenModal}) {
 
   return (
     <Box sx={{ flexGrow: 1 , zIndex: 99}} >
@@ -29,7 +29,7 @@ export default function ButtonAppBar({sideDraweOpen, setSideDraweOpen, userInfo}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {userInfo ? userInfo.name : 'Numero'}
           </Typography>
-          <Button color="inherit">{userInfo ? dayjs(userInfo.birthDate).format("DD/MM/YYYY") : 'Login'}</Button>
+          <Button onClick={()=>setOpenModal(true)} color="inherit">{userInfo ? dayjs(userInfo.birthDate).format("DD/MM/YYYY") : 'Login'}</Button>
         </Toolbar>
       </AppBar>
       <SideDrawer sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} />

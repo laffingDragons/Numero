@@ -79,7 +79,7 @@ function App(props) {
   return (
     <div className="App">
       <InfoModal openModal={openModal} setOpenModal={setOpenModal} />
-      <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} userInfo={userInfo} />
+      <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} userInfo={userInfo} setOpenModal={setOpenModal}/>
       <div>
 
         <DCK driver={calcDriver({userInfo})} conductor={calcConductor({userInfo})} kua={calcKua({userInfo})}/>
