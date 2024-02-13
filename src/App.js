@@ -1,6 +1,6 @@
 import './App.css';
 import ButtonAppBar from './components/ButtonAppBar';
-import  React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
@@ -10,6 +10,10 @@ import Fade from '@mui/material/Fade';
 import Lushu from './pages/Lushu';
 import DCK from './components/DCK';
 import InfoModal from './components/InfoModal';
+import dayjs from 'dayjs';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import {calcDriver , calcConductor, calcKua} from './helper/calculation';
 function ScrollTop(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -60,19 +64,35 @@ function App(props) {
 
   const [sideDraweOpen, setSideDraweOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+
+
+  useEffect(() => {
+    if (!userInfo) setOpenModal(true);
+  }, []);
 
   useEffect(()=>{
-    setOpenModal(true);
-  },[])
+
+  },[openModal]);
+
 
   return (
     <div className="App">
-      <InfoModal openModal={openModal} setOpenModal={setOpenModal}/>
-      <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen}/>
+      <InfoModal openModal={openModal} setOpenModal={setOpenModal} />
+      <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} userInfo={userInfo} />
       <div>
-      <DCK/>
 
+        <DCK driver={calcDriver({userInfo})} conductor={calcConductor({userInfo})} kua={calcKua({userInfo})}/>
       </div>
+      <Fab color="secondary" aria-label="edit" sx={{
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
+        background : '#458705'
+      }} 
+      onClick={()=>setOpenModal(true)}>
+        <EditIcon />
+      </Fab>
       <ScrollTop {...props}>
         <Fab size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />

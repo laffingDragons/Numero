@@ -1,32 +1,28 @@
-import Paper from '@mui/material/Paper';
 import '../App.css';
 import React, { useState } from 'react';
-import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 
-export default function DCK() {
+export default function DCK({driver, conductor, kua}) {
 
 
     return (
         <div className='app-upper'>
        
-                <div className='paper'>
+                <div className='paper rotating-card '>
                     Driver
                     <br />
-                    <span className='big-no'>5</span> 
+                    <span className='big-no'>{driver}</span> 
                 </div>
           
-                <div className='paper'>
+                <div className='paper rotating-card '>
                     Conductor
                     <br />
-                    <span className='big-no'>5</span> 
-
+                    <span className='big-no'>{conductor}</span> 
                 </div>
           
-                <div className='paper'>
+                <div className='paper rotating-card '>
                     Kua
                     <br />
-                    <span className='big-no'>5</span> 
-
+                    <span className='big-no'>{kua}</span> 
                 </div>
           
         </div>

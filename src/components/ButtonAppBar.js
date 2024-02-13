@@ -8,8 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import '../App.css';
 import SideDrawer from './SideDrawer';
+import dayjs from 'dayjs';
 
-export default function ButtonAppBar({sideDraweOpen, setSideDraweOpen}) {
+export default function ButtonAppBar({sideDraweOpen, setSideDraweOpen, userInfo}) {
 
   return (
     <Box sx={{ flexGrow: 1 , zIndex: 99}} >
@@ -26,9 +27,9 @@ export default function ButtonAppBar({sideDraweOpen, setSideDraweOpen}) {
             <MenuIcon/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Numero
+            {userInfo ? userInfo.name : 'Numero'}
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">{userInfo ? dayjs(userInfo.birthDate).format("DD/MM/YYYY") : 'Login'}</Button>
         </Toolbar>
       </AppBar>
       <SideDrawer sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} />
