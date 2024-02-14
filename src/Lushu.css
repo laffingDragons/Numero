@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 30px;
+  animation: slideUp 3s ease-in;
 }
 
 table{
@@ -42,4 +43,29 @@ td{
 
 .dark-green-check{
   color: #458705;
+}
+
+@media only screen and (max-width: 600px) {
+  table{
+    width: 100%;
+  }
+
+  .big-f{
+    font-size: 1.5em;
+  }
+  
+  .small-f{
+    font-size: 1em;
+  }
+}
+
+@keyframes slideUp {
+  0%{
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

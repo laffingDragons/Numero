@@ -15,14 +15,14 @@ export default function DCK({driver, conductor, kua}) {
                     <p>{calculateWeightage(driver)}</p>
                 </div>
           
-                <div className='paper rotating-card '>
+                <div className='paper rotating-card delay-1'>
                     Conductor
                     <br />
                     <span className='big-no'>{conductor}</span> 
                     <p>{calculateWeightage(conductor)}</p>
                 </div>
           
-                <div className='paper rotating-card '>
+                <div className='paper rotating-card delay-2'>
                     Kua
                     <br />
                     <span className='big-no'>{kua}</span> 

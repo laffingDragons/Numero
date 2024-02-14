@@ -25,7 +25,7 @@
   color: white;
 }
 
-.app-upper{
+.app-upper {
   background-color: #282c34;
   display: flex;
   align-items: center;
@@ -42,6 +42,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -49,7 +50,7 @@
 
 /* generated global stylesheet */
 
-.primary-appBar{
+.primary-appBar {
   color: #282c34;
   background-color: #78c729;
   background: #78c729;
@@ -57,13 +58,13 @@
   position: sticky;
 }
 
-.primary{
+.primary {
   color: #282c34;
   background-color: #78c729;
   background: #78c729;
 }
 
-.primary-dark-sidebar{
+.primary-dark-sidebar {
   color: #fff;
   background-color: #458705;
   background: #458705;
@@ -72,19 +73,19 @@
   margin-top: 64px;
 }
 
-.primary-dark-text{
+.primary-dark-text {
   color: #fff;
 }
 
-.primary-dark-bg{
+.primary-dark-bg {
   background-color: #458705;
 }
 
-.zIndex{
+.zIndex {
   z-index: 999;
 }
 
-.paper{
+.paper {
   width: 30%;
   color: #fff;
   background-color: #458705;
@@ -94,13 +95,13 @@
 
 }
 
-.big-no{
+.big-no {
   color: #fff;
   font-size: 4em;
   font-weight: 600;
 }
 
-.m-b-4{
+.m-b-4 {
   margin-bottom: 4px;
 }
 
@@ -113,15 +114,41 @@
 .rotating-card {
   transform-style: preserve-3d;
   transition: transform 1s;
-  animation: rotateOnce 1s forwards; /* Apply rotation animation */
+  animation: rotateOnce 1s ease-in;
+  /* Apply rotation animation */
+}
+
+.delay-1{
+  animation: rotateOnce 1.5s ease-in-out;
+
+  /* animation-delay: 1s; */
+}
+
+.delay-2{
+  animation: rotateOnce 2s ease-in-out;
+
+  /* animation-delay: 2s; */
 }
 
 @keyframes rotateOnce {
-  from {
+  0%{
+    transform: rotateY(0deg);
+    opacity: 0;
+  }
+
+  20%{
+    transform: rotateY(290deg);
+  }
+
+  40%{
     transform: rotateY(180deg);
   }
-  to {
+  60%{
+    transform: rotateY(90deg);
+  }
+  100% {
     transform: rotateY(0deg);
+    opacity: 1;
   }
 }
 
@@ -131,7 +158,7 @@
   height: 100%;
   position: absolute;
   backface-visibility: hidden;
-  
+
 }
 
 .card-front {
@@ -147,11 +174,11 @@
   text-transform: capitalize;
 }
 
-.card-back p{
+.card-back p {
   text-transform: capitalize;
 }
 
-.user-info{
+.user-info {
   color: #fff;
   font-size: 1em;
   font-weight: 600;
@@ -159,13 +186,25 @@
   background-color: #282c34;
 }
 
-.modal-title{
+.modal-title {
   color: #282c34;
   font-size: 2em;
   font-weight: 500;
   margin-top: 0px;
 }
 
-.color-bg{
+.color-bg {
   background-color: #282c34;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .app-upper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .paper {
+    width: 80%;
+  }
 }
