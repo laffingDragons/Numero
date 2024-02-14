@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background: #282c34;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -162,4 +164,8 @@
   font-size: 2em;
   font-weight: 500;
   margin-top: 0px;
+}
+
+.color-bg{
+  background-color: #282c34;
 }

@@ -80,12 +80,10 @@ export const calculateWeightage = (input) => {
 
     let [numerator, denominator] = input.split('/');
 
-    console.log("🚀🚀🚀 ===> ~ denominator<=== 🚀🚀🚀", denominator);
-
     numerator = numerator.replace(/0/g, '');
 
     if (denominator.includes(0)) {
-        
+
         if (denominator.includes(numerator)) return `${numerator} = 100%`;
         
         return `${numerator} = 50%, ${denominator[0]} = 50%`;
@@ -106,6 +104,6 @@ export const calculateWeightage = (input) => {
     return `${numerator} = 50%, ${denominator[0]} = 30%, ${denominator[1]} = 20%,`;
 }
 
-function countOccurrences(string, char) {
+export const countOccurrences = (string, char) => {
     return string.split(char).length - 1;
 }

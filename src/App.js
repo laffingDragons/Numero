@@ -80,10 +80,18 @@ function App(props) {
     <div className="App">
       <InfoModal openModal={openModal} setOpenModal={setOpenModal} />
       <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} userInfo={userInfo} setOpenModal={setOpenModal}/>
-      <div>
+      
+      <div className='color-bg'>
+      {userInfo &&
+        <DCK driver={calcDriver({userInfo})} conductor={calcConductor({userInfo})} kua={calcKua({userInfo})}/> }
 
-        <DCK driver={calcDriver({userInfo})} conductor={calcConductor({userInfo})} kua={calcKua({userInfo})}/>
+      {
+        userInfo &&
+        <Lushu driver={calcDriver({userInfo})} conductor={calcConductor({userInfo})} kua={calcKua({userInfo})} birthDate={userInfo.birthDate}/>
+      }
       </div>
+
+
       <Fab color="secondary" aria-label="edit" sx={{
         position: 'absolute',
         bottom: 16,

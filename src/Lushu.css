@@ -1,0 +1,45 @@
+.center-flex{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+table{
+  background-color: #78c729;
+  background: #78c729;
+  padding: 10px 10px 30px 10px;
+  border-radius: 10px;
+  table-layout: fixed;
+}
+
+td{
+  padding: 10px 20px;
+}
+
+.big-f{
+  font-size: 3em;
+  /* border: 1px solid rgb(58, 55, 55); */
+  border-radius: 6px;
+}
+
+.small-f{
+  font-size: 1.5em;
+}
+
+.black-check{
+  color: #000;
+}
+
+.white-check{
+  color: #fff;
+
+}
+
+.green-check{
+  color: #78c729;
+}
+
+.dark-green-check{
+  color: #458705;
+}
