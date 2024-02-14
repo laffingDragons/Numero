@@ -207,4 +207,8 @@
   .paper {
     width: 80%;
   }
+
+.App {
+  min-height: 110vh;
+}
 }

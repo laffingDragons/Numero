@@ -92,8 +92,15 @@ function App(props) {
       </div>
 
 
+      
+      <ScrollTop {...props}>
+        <Fab size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
+
       <Fab color="secondary" aria-label="edit" sx={{
-        position: 'absolute',
+        position: 'sticky',
         bottom: 16,
         right: 16,
         background : '#458705'
@@ -101,11 +108,6 @@ function App(props) {
       onClick={()=>setOpenModal(true)}>
         <EditIcon />
       </Fab>
-      <ScrollTop {...props}>
-        <Fab size="small" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop>
     </div>
   );
 }
