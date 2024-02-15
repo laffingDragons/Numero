@@ -13,7 +13,7 @@ import InfoModal from './components/InfoModal';
 import dayjs from 'dayjs';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
-import {calcDriver , calcConductor, calcKua} from './helper/calculation';
+import { calcDriver, calcConductor, calcKua } from './helper/calculation';
 function ScrollTop(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -71,28 +71,28 @@ function App(props) {
     if (!userInfo) setOpenModal(true);
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
 
-  },[openModal]);
+  }, [openModal]);
 
 
   return (
-    <div className="App">
+    <div className="App" id='back-to-top-anchor'>
       <InfoModal openModal={openModal} setOpenModal={setOpenModal} />
-      <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} userInfo={userInfo} setOpenModal={setOpenModal}/>
-      
-      <div className='color-bg'>
-      {userInfo &&
-        <DCK driver={calcDriver({userInfo})} conductor={calcConductor({userInfo})} kua={calcKua({userInfo})}/> }
+      <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} userInfo={userInfo} setOpenModal={setOpenModal} />
 
-      {
-        userInfo &&
-        <Lushu driver={calcDriver({userInfo})} conductor={calcConductor({userInfo})} kua={calcKua({userInfo})} birthDate={userInfo.birthDate}/>
-      }
+      <div className='color-bg'>
+        {userInfo &&
+          <DCK driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} />}
+
+        {
+          userInfo &&
+          <Lushu driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} birthDate={userInfo.birthDate} />
+        }
       </div>
 
 
-      
+
       <ScrollTop {...props}>
         <Fab size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
@@ -100,12 +100,10 @@ function App(props) {
       </ScrollTop>
 
       <Fab color="secondary" aria-label="edit" sx={{
-        position: 'sticky',
-        bottom: 16,
-        right: 16,
-        background : '#458705'
-      }} 
-      onClick={()=>setOpenModal(true)}>
+        background: '#458705',
+        position: 'fixed', bottom: 8, right: 16
+      }}
+        onClick={() => setOpenModal(true)}>
         <EditIcon />
       </Fab>
     </div>

@@ -78,11 +78,14 @@ function addDigitsUntilSingle(num) {
 
 export const calculateWeightage = (input) => {
 
+    if(input === '?') return input;
+
     let [numerator, denominator] = input.split('/');
 
     numerator = numerator.replace(/0/g, '');
-
+    
     if (denominator.includes(0)) {
+
 
         if (denominator.includes(numerator)) return `${numerator} = 100%`;
         
