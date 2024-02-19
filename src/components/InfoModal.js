@@ -28,17 +28,19 @@ const style = {
   borderRadius: '10px',
 };
 
-export default function InfoModal({ openModal, setOpenModal }) {
+export default function InfoModal({ openModal, setOpenModal, drawerState }) {
 
-  const userInfo =  JSON.parse(localStorage.getItem("userInfo"))
+  const userInfo =  JSON.parse(localStorage.getItem("userInfo"));
+  const mobileInfo =  JSON.parse(localStorage.getItem("mobileInfo"));
 
   const [name, setName] = useState(userInfo?.name || '');
   const [birthDate, setBirthDate] = useState(userInfo?.birthDate || '');
   const [gender, setGender] = useState(userInfo?.gender || '');
+  const [mobile, setMobile] = useState(mobileInfo?.gender || '');
   const [showWarning, setShowWarning] = useState('');
   
 
-  const save = () =>{
+  const saveInfo = () =>{
     if(!name) setShowWarning('Please enter a valid name');
     else if(!birthDate) setShowWarning('Please select a valid Birthdate');
     else if(!gender) setShowWarning('Please select a valid gender');
@@ -50,7 +52,17 @@ export default function InfoModal({ openModal, setOpenModal }) {
       }
       localStorage.setItem("userInfo", JSON.stringify(obj));
       setOpenModal(false);
-      console.log(name, gender, birthDate);
+    }
+  }
+
+  const saveMobileInfo = () =>{
+    if(!mobile) setShowWarning('Please enter a valid name');
+    else{
+      let obj = {
+        mobile,
+      }
+      localStorage.setItem("mobileInfo", JSON.stringify(obj));
+      setOpenModal(false);
     }
   }
 
@@ -58,7 +70,7 @@ export default function InfoModal({ openModal, setOpenModal }) {
 
   return (
     <div>
-      <Modal
+     {drawerState === 'Lushu' && <Modal
         open={openModal}
         // onClose={setOpenModal}
         aria-labelledby="modal-modal-title"
@@ -99,9 +111,39 @@ export default function InfoModal({ openModal, setOpenModal }) {
             </Select>
           </FormControl>
 
-          <Button variant="contained"  color="success" sx={{marginTop:'10px', padding : '10px 24px', marginLeft : 'auto', display: 'block'}} onClick={save}>Save</Button>
+          <Button variant="contained"  color="success" sx={{marginTop:'10px', padding : '10px 24px', marginLeft : 'auto', display: 'block'}} onClick={saveInfo}>Save</Button>
+        </Box>
+      </Modal>}
+
+      {
+        drawerState === 'Mobile & Bank' &&
+        <Modal
+        open={openModal}
+        // onClose={setOpenModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <div>
+          <p className='modal-title'>Mobile OR Bank Account Details</p>
+        </div>
+          <TextField
+            required
+            id="outlined-required"
+            label="Mobile OR Bank Account"
+            fullWidth
+            value={mobile}
+            type='number'
+            onChange={(event)=>setMobile(event.target.value)}
+            sx={{marginBottom : '10px'}}
+          />
+
+
+          <Button variant="contained"  color="success" sx={{marginTop:'10px', padding : '10px 24px', marginLeft : 'auto', display: 'block'}} onClick={saveMobileInfo}>Save</Button>
         </Box>
       </Modal>
+      }
+
       <Snackbar
         open={showWarning}
         autoHideDuration={6000}

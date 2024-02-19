@@ -12,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
-export default function SideDrawer({sideDraweOpen, setSideDraweOpen}) {
+export default function SideDrawer({sideDraweOpen, setSideDraweOpen, drawerState, setDrawerState}) {
 
   const list = () => (
     <Box
@@ -22,9 +22,9 @@ export default function SideDrawer({sideDraweOpen, setSideDraweOpen}) {
       class='primary-dark-sidebar'
     >
       <List >
-        {['Lushu', 'Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['Lushu'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={()=>setDrawerState(text)}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
@@ -35,9 +35,9 @@ export default function SideDrawer({sideDraweOpen, setSideDraweOpen}) {
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {['Mobile & Bank'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={()=>setDrawerState(text)}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>

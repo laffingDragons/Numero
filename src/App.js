@@ -10,10 +10,9 @@ import Fade from '@mui/material/Fade';
 import Lushu from './pages/Lushu';
 import DCK from './components/DCK';
 import InfoModal from './components/InfoModal';
-import dayjs from 'dayjs';
-import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import { calcDriver, calcConductor, calcKua } from './helper/calculation';
+import Mobile from './pages/Mobile';
 function ScrollTop(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -64,11 +63,16 @@ function App(props) {
 
   const [sideDraweOpen, setSideDraweOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"))
-
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const mobileInfo =  JSON.parse(localStorage.getItem("mobileInfo"))
+  const [drawerState, setDrawerState] = useState('Lushu');
 
   useEffect(() => {
-    if (!userInfo) setOpenModal(true);
+    if(drawerState === 'Lushu'){
+      if (!userInfo) setOpenModal(true);
+    }else if(drawerState === 'Mobile & Bank'){
+      if (!mobileInfo) setOpenModal(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -78,16 +82,21 @@ function App(props) {
 
   return (
     <div className="App" id='back-to-top-anchor'>
-      <InfoModal openModal={openModal} setOpenModal={setOpenModal} />
-      <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} userInfo={userInfo} setOpenModal={setOpenModal} />
+      <InfoModal openModal={openModal} setOpenModal={setOpenModal} drawerState={drawerState}/>
+      <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} userInfo={userInfo} setOpenModal={setOpenModal} drawerState={drawerState} setDrawerState={setDrawerState}/>
 
       <div className='color-bg'>
         {userInfo &&
           <DCK driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} />}
 
         {
-          userInfo &&
+          userInfo && drawerState === 'Lushu' &&
           <Lushu driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} birthDate={userInfo.birthDate} />
+        }
+
+        {
+          userInfo && drawerState === 'Mobile & Bank' &&
+          <Mobile driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} birthDate={userInfo.birthDate} />
         }
       </div>
 

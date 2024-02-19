@@ -59,7 +59,7 @@ export const calcKua = ({ userInfo }) => {
 }
 
 
-function addDigitsUntilSingle(num) {
+export const addDigitsUntilSingle = (num) => {
     // Function to calculate the sum of digits in a number
     const sumOfDigits = (n) => String(n).split('').reduce((acc, digit) => acc + parseInt(digit), 0);
 
