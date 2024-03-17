@@ -82,7 +82,6 @@ function App(props) {
 
   return (
     <div className="App" id='back-to-top-anchor'>
-      <InfoModal openModal={openModal} setOpenModal={setOpenModal} drawerState={drawerState} />
       <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} userInfo={userInfo} setOpenModal={setOpenModal} drawerState={drawerState} setDrawerState={setDrawerState} />
 
       <div className='color-bg'>
@@ -117,6 +116,8 @@ function App(props) {
         onClick={() => setOpenModal(true)}>
         <EditIcon />
       </Fab>
+      <InfoModal openModal={openModal} setOpenModal={setOpenModal} drawerState={drawerState} />
+
     </div>
   );
 }

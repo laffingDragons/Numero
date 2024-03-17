@@ -58,6 +58,7 @@ export default function InfoModal({ openModal, setOpenModal, drawerState }) {
         localStorage.setItem("userInfo", JSON.stringify([obj]));
       }
       setOpenModal(false);
+      window.location.reload()
     }
   }
 

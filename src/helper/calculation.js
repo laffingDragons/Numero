@@ -3,9 +3,20 @@ import dayjs from 'dayjs';
 export const calcDriver = ({ userInfo }) => {
     if (!userInfo?.birthDate) return '?';
 
-    const dateString = dayjs(userInfo?.birthDate).format('DD/MM/YYYY');
 
-    return `${(+dateString[0]) + (+dateString[1])}/${(dateString[0]) + (dateString[1])}`;
+    const birthdate = dayjs(userInfo?.birthDate).format('DD');
+
+    // Step 1: Remove non-numeric characters
+    const numericString = birthdate.replace(/\D/g, '');
+
+    // Step 3: Sum up all digits using reduce
+    const sum = birthdate; 
+
+    const singleDigitSum = numericString.split('').map(Number).reduce((acc, digit) => acc + digit, 0); // Calculate initial sum
+
+    const output = addDigitsUntilSingle(singleDigitSum);
+
+    return `${output}/${sum}`;
 }
 
 export const calcConductor = ({ userInfo }) => {
