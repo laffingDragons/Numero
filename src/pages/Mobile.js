@@ -2,9 +2,9 @@ import '../App.css';
 import React, { useState } from 'react';
 import { addDigitsUntilSingle, calculateWeightage } from '../helper/calculation';
 
-export default function Mobile({ birthDate, driver, conductor, kua }) {
+export default function Mobile({ userInfo, birthDate, driver, conductor, kua }) {
 
-  const mobileInfo = JSON.parse(localStorage.getItem("mobileInfo")).mobile;
+  const mobileInfo = userInfo?.mobile;
 
   
   const calcMobile = () => {

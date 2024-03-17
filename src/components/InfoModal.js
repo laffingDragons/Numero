@@ -30,13 +30,12 @@ const style = {
 
 export default function InfoModal({ openModal, setOpenModal, drawerState }) {
 
-  const userInfo =  JSON.parse(localStorage.getItem("userInfo"));
-  const mobileInfo =  JSON.parse(localStorage.getItem("mobileInfo"));
+  const userInfoArray = JSON.parse(localStorage.getItem("userInfo"));
 
-  const [name, setName] = useState(userInfo?.name || '');
-  const [birthDate, setBirthDate] = useState(userInfo?.birthDate || '');
-  const [gender, setGender] = useState(userInfo?.gender || '');
-  const [mobile, setMobile] = useState(mobileInfo?.gender || '');
+  const [name, setName] = useState(userInfoArray.length ? userInfoArray[0].name : '');
+  const [birthDate, setBirthDate] = useState(userInfoArray.length ? userInfoArray[0].birthDate : '');
+  const [gender, setGender] = useState(userInfoArray.length ? userInfoArray[0].gender : '');
+  const [mobile, setMobile] = useState(userInfoArray.length ? userInfoArray[0].setMobile : '');
   const [showWarning, setShowWarning] = useState('');
   
 
@@ -44,29 +43,36 @@ export default function InfoModal({ openModal, setOpenModal, drawerState }) {
     if(!name) setShowWarning('Please enter a valid name');
     else if(!birthDate) setShowWarning('Please select a valid Birthdate');
     else if(!gender) setShowWarning('Please select a valid gender');
+    else if(!mobile) setShowWarning('Please enter a valid name');
     else{
       let obj = {
         name,
         gender,
-        birthDate
-      }
-      localStorage.setItem("userInfo", JSON.stringify(obj));
-      setOpenModal(false);
-    }
-  }
-
-  const saveMobileInfo = () =>{
-    if(!mobile) setShowWarning('Please enter a valid name');
-    else{
-      let obj = {
+        birthDate,
         mobile,
       }
-      localStorage.setItem("mobileInfo", JSON.stringify(obj));
+      let data = JSON.parse(localStorage.getItem('userInfo'))
+      if (data) {
+        localStorage.setItem("userInfo", JSON.stringify([obj, ...data]));
+      } else {
+        localStorage.setItem("userInfo", JSON.stringify([obj]));
+      }
       setOpenModal(false);
     }
   }
 
-  useEffect(()=>setShowWarning(''),[name, gender, birthDate]);
+  // const saveMobileInfo = () =>{
+  //   if(!mobile) setShowWarning('Please enter a valid name');
+  //   else{
+  //     let obj = {
+  //       mobile,
+  //     }
+  //     localStorage.setItem("mobileInfo", JSON.stringify(obj));
+  //     setOpenModal(false);
+  //   }
+  // }
+
+  useEffect(()=>setShowWarning(''),[name, gender, birthDate, mobile]);
 
   return (
     <div>
@@ -111,11 +117,22 @@ export default function InfoModal({ openModal, setOpenModal, drawerState }) {
             </Select>
           </FormControl>
 
+          <TextField
+            required
+            id="outlined-required"
+            label="Mobile OR Bank Account"
+            fullWidth
+            value={mobile}
+            type='number'
+            onChange={(event)=>setMobile(event.target.value)}
+            sx={{marginBottom : '10px'}}
+          />
+
           <Button variant="contained"  color="success" sx={{marginTop:'10px', padding : '10px 24px', marginLeft : 'auto', display: 'block'}} onClick={saveInfo}>Save</Button>
         </Box>
       </Modal>}
 
-      {
+      {/* {
         drawerState === 'Mobile & Bank' &&
         <Modal
         open={openModal}
@@ -142,7 +159,7 @@ export default function InfoModal({ openModal, setOpenModal, drawerState }) {
           <Button variant="contained"  color="success" sx={{marginTop:'10px', padding : '10px 24px', marginLeft : 'auto', display: 'block'}} onClick={saveMobileInfo}>Save</Button>
         </Box>
       </Modal>
-      }
+      } */}
 
       <Snackbar
         open={showWarning}

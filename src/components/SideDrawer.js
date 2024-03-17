@@ -35,7 +35,7 @@ export default function SideDrawer({sideDraweOpen, setSideDraweOpen, drawerState
       </List>
       <Divider />
       <List>
-        {['Mobile & Bank'].map((text, index) => (
+        {['DataBase'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={()=>setDrawerState(text)}>
               <ListItemIcon>
