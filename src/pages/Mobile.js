@@ -23,9 +23,9 @@ export default function Mobile({ userInfo, birthDate, driver, conductor, kua }) 
 }
     return (
         <>
-            <h1 className='white-check'>Mobile no. OR Bank account Analysis</h1>
 
-            <div className='paper rotating-card mx-auto'>
+            <div className='paper rotating-card'>
+            <h1 className='white-check'>Mobile no. OR Bank account Analysis</h1>
                     {mobileInfo}
                     <br />
                     <span className='big-no'>{calcMobile()}</span> 

@@ -14,6 +14,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { calcDriver, calcConductor, calcKua } from './helper/calculation';
 import Mobile from './pages/Mobile';
 import DataBase from './pages/DataBase';
+import Personal from './components/Personal';
 function ScrollTop(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -95,10 +96,11 @@ function App(props) {
             <DCK driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} />}
 
           {
-            userInfo && drawerState === 'Lushu' && (<>
+            userInfo && drawerState === 'Lushu' && (<div className='flex-arrangements'>
+              <Personal userInfo={userInfo}/>
               <Lushu driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} birthDate={userInfo.birthDate} />
               <Mobile userInfo={userInfo} driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} birthDate={userInfo.birthDate} />
-            </>)
+            </div>)
           }
 
 

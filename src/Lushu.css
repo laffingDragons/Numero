@@ -12,6 +12,7 @@ table{
   padding: 10px 10px 30px 10px;
   border-radius: 10px;
   table-layout: fixed;
+  margin: 16px 8px;
 }
 
 td{

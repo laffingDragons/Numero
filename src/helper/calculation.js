@@ -41,6 +41,56 @@ export const calcConductor = ({ userInfo }) => {
     return `${output}/${sum}`;
 }
 
+export const calcPY = ({ userInfo }) => {
+
+    if (!userInfo?.birthDate) return '?';
+
+    const birthdate = dayjs(userInfo?.birthDate).format('DD/MM/')+ dayjs().year();
+
+    // Step 1: Remove non-numeric characters
+    const numericString = birthdate.replace(/\D/g, '');
+
+    // Step 2: Convert string to array of digits
+    const digitArray = numericString.split('').map(Number); // Result: [2, 3, 1, 1, 1, 9, 9, 5]
+
+    // Step 3: Sum up all digits using reduce
+    const PY = digitArray.reduce((acc, digit) => acc + digit, 0); // Result: 31
+
+    const singleDigitSum = numericString.split('').map(Number).reduce((acc, digit) => acc + digit, 0); // Calculate initial sum
+
+    const output = addDigitsUntilSingle(singleDigitSum);
+
+    const PM = PY + dayjs().month()+1;
+
+    const output1 = addDigitsUntilSingle(PM);
+
+    const today = dayjs().format('DD/MM/YYYY');
+    
+    // Step 1: Remove non-numeric characters
+    const todayString = today.replace(/\D/g, '');
+    
+    // Step 2: Convert string to array of digits
+    const digitArrayToday = todayString.split('').map(Number); // Result: [2, 3, 1, 1, 1, 9, 9, 5]
+
+    // Step 3: Sum up all digits using reduce
+    const tempPD = digitArrayToday.reduce((acc, digit) => acc + digit, 0); // Result: 31
+    console.log('🚀___ ~ PD to add_______ :', tempPD);
+    
+    const PD = PY + PM + tempPD
+    
+    const output2 = addDigitsUntilSingle(PD);
+
+    let obj = {
+        py:`${output}/${PY}`,
+        pm:`${output1}/${PM}`,
+        pd:`${output2}/${PD}`,
+    }
+
+    return obj 
+
+}
+
+
 export const calcKua = ({ userInfo }) => {
     if (!userInfo?.birthDate) return '?';
 

@@ -85,6 +85,22 @@
   z-index: 999;
 }
 
+.flex-arrangements{
+  display: flex;
+  /* gap: 10px; */
+  align-items: stretch;
+  justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 1000px) {
+  .flex-arrangements{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+}
+
 .paper {
   width: 30%;
   color: #fff;
@@ -247,7 +263,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-  animation: slideUp 3s ease-in;
+  animation: slideUp 1s ease-in;
   margin-top: 44px;
   /* margin-bottom: 44px; */
   }

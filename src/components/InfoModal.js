@@ -29,159 +29,117 @@ const style = {
 };
 
 export default function InfoModal({ openModal, setOpenModal, drawerState, userInfo }) {
-
-  const userInfoArray = JSON.parse(localStorage.getItem("userInfo"));
-
-  const [name, setName] = useState(userInfo ? userInfo.name : '');
-  const [birthDate, setBirthDate] = useState(userInfo ? userInfo.birthDate : '');
-  const [gender, setGender] = useState(userInfo ? userInfo.gender : '');
-  const [mobile, setMobile] = useState(userInfo ? userInfo.mobile : '');
+  const [formData, setFormData] = useState({
+    name: userInfo?.name || '',
+    birthDate: userInfo?.birthDate || '',
+    gender: userInfo?.gender || '',
+    mobile: userInfo?.mobile || '',
+  });
   const [showWarning, setShowWarning] = useState('');
 
-  useEffect(()=>{
-    setName(userInfo.name);
-    setBirthDate(userInfo.birthDate);
-    setGender(userInfo.gender);
-    setMobile(userInfo.mobile);
-  },[openModal])
+  useEffect(() => {
+    if (openModal) setFormData({ ...formData, ...userInfo });
+  }, [openModal]);
 
+  const handleInputChange = (field, value) => {
+    setFormData({ ...formData, [field]: value });
+  };
 
   const saveInfo = () => {
-    if (!name) setShowWarning('Please enter a valid name');
-    else if (!birthDate) setShowWarning('Please select a valid Birthdate');
-    else if (!gender) setShowWarning('Please select a valid gender');
-    else if (!mobile) setShowWarning('Please enter a valid name');
-    else {
-
-      let obj = {
-        name,
-        gender,
-        birthDate,
-        mobile,
-        date: Date.now(),
-      }
-      let data = JSON.parse(localStorage.getItem('userInfo'))
-      if (data) {
-
-        const indexToReplace = data.findIndex(x => x.mobile === obj.mobile);
-        if (indexToReplace !== -1) {
-          data[indexToReplace] = obj;
-          localStorage.setItem("userInfo", JSON.stringify(data));
-        } else {
-          localStorage.setItem("userInfo", JSON.stringify([obj, ...data]));
-        }
-
-      } else {
-        localStorage.setItem("userInfo", JSON.stringify([obj]));
-      }
-      setOpenModal(false);
-      window.location.reload()
+    const { name, birthDate, gender, mobile } = formData;
+    if (!name || !birthDate || !gender || !mobile) {
+      setShowWarning('Please fill in all fields');
+      return;
     }
-  }
 
-  // const saveMobileInfo = () =>{
-  //   if(!mobile) setShowWarning('Please enter a valid name');
-  //   else{
-  //     let obj = {
-  //       mobile,
-  //     }
-  //     localStorage.setItem("mobileInfo", JSON.stringify(obj));
-  //     setOpenModal(false);
-  //   }
-  // }
+    const obj = { ...formData, date: Date.now() };
+    const data = JSON.parse(localStorage.getItem('userInfo')) || [];
+    const indexToReplace = data.findIndex(x => x.mobile === obj.mobile);
+    if (indexToReplace !== -1) data[indexToReplace] = obj;
+    else data.unshift(obj);
+    localStorage.setItem("userInfo", JSON.stringify(data));
+    setOpenModal(false);
+    window.location.reload();
+  };
 
-  useEffect(() => setShowWarning(''), [name, gender, birthDate, mobile]);
-  console.log('🚀___ ~ name, _______ :', name, gender, birthDate, mobile);
+  useEffect(() => setShowWarning(''), [formData]);
 
   return (
     <div>
-      {drawerState === 'Lushu' && <Modal
-        open={openModal}
-        // onClose={setOpenModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <div>
-            <p className='modal-title'>User Details</p>
-          </div>
-          <TextField
-            required
-            id="outlined-required"
-            label="Name"
-            fullWidth
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            sx={{ marginBottom: '10px' }}
-          />
-
-          <LocalizationProvider dateAdapter={AdapterDayjs} >
-            <DatePicker required format="DD/MM/YYYY" value={dayjs(birthDate)} onChange={(event) => setBirthDate(dayjs(event))} sx={{ marginBottom: '10px' }} />
-          </LocalizationProvider>
-
-
-          <FormControl sx={{ marginBottom: '10px' }} fullWidth>
-            <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-            <Select
-              required
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={gender}
-              label="Gender"
-              onChange={(event) => setGender(event.target.value)}
-            >
-              <MenuItem value={'male'}>Male</MenuItem>
-              <MenuItem value={'female'}>Female</MenuItem>
-              <MenuItem value={'na'}>Transgender</MenuItem>
-            </Select>
-          </FormControl>
-
-          <TextField
-            required
-            id="outlined-required"
-            label="Mobile OR Bank Account"
-            fullWidth
-            value={mobile}
-            type='number'
-            onChange={(event) => setMobile(event.target.value)}
-            sx={{ marginBottom: '10px' }}
-          />
-
-          <div className='button-allign'>
-            {userInfoArray.length && <Button variant="contained" color="warning" sx={{ marginTop: '10px', padding: '10px 24px' }} onClick={() => setOpenModal(false)}>Cancel</Button>}
-            <Button variant="contained" color="success" sx={{ marginTop: '10px', padding: '10px 24px' }} onClick={saveInfo}>Save</Button>
-          </div>
-        </Box>
-      </Modal>}
-
-      {/* {
-        drawerState === 'Mobile & Bank' &&
+      {drawerState === 'Lushu' && 
         <Modal
-        open={openModal}
-        // onClose={setOpenModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-        <div>
-          <p className='modal-title'>Mobile OR Bank Account Details</p>
-        </div>
-          <TextField
-            required
-            id="outlined-required"
-            label="Mobile OR Bank Account"
-            fullWidth
-            value={mobile}
-            type='number'
-            onChange={(event)=>setMobile(event.target.value)}
-            sx={{marginBottom : '10px'}}
-          />
+          open={openModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <div>
+              <p className='modal-title'>User Details</p>
+            </div>
+            <TextField
+              required
+              label="Name"
+              fullWidth
+              value={formData.name}
+              onChange={(event) => handleInputChange('name', event.target.value)}
+              sx={{ marginBottom: '10px' }}
+            />
 
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                required
+                format="DD/MM/YYYY"
+                value={dayjs(formData.birthDate)}
+                onChange={(event) => handleInputChange('birthDate', dayjs(event))}
+                sx={{ marginBottom: '10px' }}
+              />
+            </LocalizationProvider>
 
-          <Button variant="contained"  color="success" sx={{marginTop:'10px', padding : '10px 24px', marginLeft : 'auto', display: 'block'}} onClick={saveMobileInfo}>Save</Button>
-        </Box>
-      </Modal>
-      } */}
+            <FormControl sx={{ marginBottom: '10px' }} fullWidth>
+              <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+              <Select
+                required
+                labelId="demo-simple-select-label"
+                value={formData.gender}
+                onChange={(event) => handleInputChange('gender', event.target.value)}
+              >
+                <MenuItem value={'male'}>Male</MenuItem>
+                <MenuItem value={'female'}>Female</MenuItem>
+                <MenuItem value={'na'}>Transgender</MenuItem>
+              </Select>
+            </FormControl>
+
+            <TextField
+              required
+              label="Mobile OR Bank Account"
+              fullWidth
+              value={formData.mobile}
+              type='number'
+              onChange={(event) => handleInputChange('mobile', event.target.value)}
+              sx={{ marginBottom: '10px' }}
+            />
+
+            <div className='button-allign'>
+              <Button
+                variant="contained"
+                color="warning"
+                sx={{ marginTop: '10px', padding: '10px 24px' }}
+                onClick={() => setOpenModal(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                color="success"
+                sx={{ marginTop: '10px', padding: '10px 24px' }}
+                onClick={saveInfo}
+              >
+                Save
+              </Button>
+            </div>
+          </Box>
+        </Modal>
+      }
 
       <Snackbar
         open={showWarning}

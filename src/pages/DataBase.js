@@ -62,7 +62,7 @@ export default function DataBase({editData}) {
                             <td class="column100 column4" data-column="column4">{user.mobile}</td>
                             <td class="column100 column4" data-column="column4">{user.date ? dayjs(user.date).format("DD/MM/YYYY") : ''}</td>
                             <td class="column100 column4" data-column="column4">
-                                <IconButton title={`Edit ${user.name}`} onClick={(e)=>{e.stopPropagation();editData(index, true)}}><EditIcon /></IconButton> &nbsp; <IconButton><DeleteIcon onClick={() => deleteUserAlert(user)} /></IconButton></td>
+                                <IconButton title={`Edit ${user.name}`} onClick={(e)=>{e.stopPropagation();editData(index, true)}}><EditIcon /></IconButton> &nbsp; <IconButton><DeleteIcon onClick={(e)=>{e.stopPropagation();deleteUserAlert(user)}} /></IconButton></td>
                         </tr>))}
 
                     </tbody>

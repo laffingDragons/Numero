@@ -44,8 +44,8 @@ export default function Lushu({ birthDate, driver, conductor, kua }) {
 
     return (
         <>
+            <div >
             <h1 className='white-check'>Lushu Grid</h1>
-            <div className='center-flex'>
 
                 <table>
 
