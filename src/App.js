@@ -15,6 +15,8 @@ import { calcDriver, calcConductor, calcKua } from './helper/calculation';
 import Mobile from './pages/Mobile';
 import DataBase from './pages/DataBase';
 import Personal from './components/Personal';
+import Balancing from './components/Balancing';
+
 function ScrollTop(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -68,7 +70,6 @@ function App(props) {
   const userInfoArray = JSON.parse(localStorage.getItem("userInfo"));
   const [drawerState, setDrawerState] = useState('Lushu');
   const [userInfo, setUserInfo] = useState(userInfoArray.length ? userInfoArray[0] : '')
-  console.log('🚀___ ~ userInfo_______ :', userInfo);
 
   useEffect(() => {
     if (drawerState === 'Lushu') {
@@ -100,8 +101,13 @@ function App(props) {
               <Personal userInfo={userInfo}/>
               <Lushu driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} birthDate={userInfo.birthDate} />
               <Mobile userInfo={userInfo} driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} birthDate={userInfo.birthDate} />
+              
             </div>)
           }
+
+
+{userInfo &&
+            <Balancing userInfo={userInfo}/>}
 
 
           {

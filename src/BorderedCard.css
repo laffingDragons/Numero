@@ -1,0 +1,34 @@
+.bordered-card-container {
+display: flex;
+justify-content: space-evenly;
+gap: 12px;
+    margin-top: 16px;
+}
+
+.bordered-card {
+  border-radius: 16px 0px 16px 0px;
+  border: 6px solid #78c729;
+  padding: 16px;
+  }
+
+
+@media only screen and (max-width: 1000px) {
+  
+}
+
+
+@media only screen and (max-width: 600px) {
+ 
+}
+
+
+@keyframes slideUp {
+  0%{
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

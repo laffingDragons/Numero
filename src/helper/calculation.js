@@ -74,7 +74,6 @@ export const calcPY = ({ userInfo }) => {
 
     // Step 3: Sum up all digits using reduce
     const tempPD = digitArrayToday.reduce((acc, digit) => acc + digit, 0); // Result: 31
-    console.log('🚀___ ~ PD to add_______ :', tempPD);
     
     const PD = PY + PM + tempPD
     
