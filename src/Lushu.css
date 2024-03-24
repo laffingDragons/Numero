@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: center;
   margin-top: 30px;
-  animation: slideUp 3s ease-in;
 }
 
 table{
@@ -13,6 +12,8 @@ table{
   border-radius: 10px;
   table-layout: fixed;
   margin: 16px 8px;
+  animation: slideUp 4s ease-in;
+
 }
 
 td{

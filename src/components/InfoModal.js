@@ -47,20 +47,37 @@ export default function InfoModal({ openModal, setOpenModal, drawerState, userIn
 
   const saveInfo = () => {
     const { name, birthDate, gender, mobile } = formData;
-    if (!name || !birthDate || !gender || !mobile) {
-      setShowWarning('Please fill in all fields');
+
+    if (!name) {
+      setShowWarning( "Oops! Looks like you forgot to tell us your name. It's kind of important, you know!");
       return;
     }
-
+  
+    if (!birthDate) {
+      setShowWarning( "Hey there! We need your birthdate to know if you're old enough to party with us!");
+      return;
+    }
+  
+    if (!gender) {
+      setShowWarning("Um, excuse us! We need to know if you're a ninja, unicorn, or something else cool!");
+      return;
+    }
+  
+    if (!mobile) {
+      setShowWarning("Whoa, slow down! We need your mobile number to keep in touch. No, we won't prank call you. Maybe.");
+      return;
+    }
+    
+    
     const obj = { ...formData, date: Date.now() };
-    const data = JSON.parse(localStorage.getItem('userInfo')) || [];
+    const data = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : [];
     const indexToReplace = data.findIndex(x => x.mobile === obj.mobile);
     if (indexToReplace !== -1) data[indexToReplace] = obj;
     else data.unshift(obj);
     localStorage.setItem("userInfo", JSON.stringify(data));
     setOpenModal(false);
-    // window.location.reload();
     setUserInfo(obj);
+    // window.location.reload();
   };
 
   useEffect(() => setShowWarning(''), [formData]);
@@ -121,14 +138,14 @@ export default function InfoModal({ openModal, setOpenModal, drawerState, userIn
             />
 
             <div className='button-allign'>
-              <Button
+              {userInfo && <Button
                 variant="contained"
                 color="warning"
                 sx={{ marginTop: '10px', padding: '10px 24px' }}
                 onClick={() => setOpenModal(false)}
               >
                 Cancel
-              </Button>
+              </Button>}
               <Button
                 variant="contained"
                 color="success"

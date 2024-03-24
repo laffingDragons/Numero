@@ -45,7 +45,6 @@ export function nameToNumber(name) {
         const sum = String(number).split('').map(Number).reduce((acc, digit) => acc + digit, 0);
         return sum;
     });
-    console.log('🚀___ ~ wholeNumbers_______ :', letterSum);
 
     return letterSum;
 }

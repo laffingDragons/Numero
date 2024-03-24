@@ -67,9 +67,16 @@ function App(props) {
 
   const [sideDraweOpen, setSideDraweOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const userInfoArray = JSON.parse(localStorage.getItem("userInfo"));
+  const userInfoArray = () =>{
+    if(localStorage.getItem("userInfo")){
+      return JSON.parse(localStorage.getItem("userInfo"));
+    }else{
+      localStorage.setItem('userInfo', []);
+      return [];
+    }
+  };
   const [drawerState, setDrawerState] = useState('Lushu');
-  const [userInfo, setUserInfo] = useState(userInfoArray.length ? userInfoArray[0] : '')
+  const [userInfo, setUserInfo] = useState(userInfoArray()?.length ? userInfoArray()[0] : '')
 
   useEffect(() => {
     if (drawerState === 'Lushu') {
@@ -81,10 +88,10 @@ function App(props) {
 
   }, [openModal]);
 
-  const editData = (index, edit) =>{
+  const editData = (index, edit) => {
     setDrawerState('Lushu')
-    setUserInfo(userInfoArray[index]);
-    if(edit)setOpenModal(true)
+    setUserInfo(userInfoArray()[index]);
+    if (edit) setOpenModal(true)
   }
 
   return (
@@ -93,21 +100,21 @@ function App(props) {
         <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} userInfo={userInfo} setOpenModal={setOpenModal} drawerState={drawerState} setDrawerState={setDrawerState} />
 
         <div className='color-bg'>
-          {userInfo &&
+          {userInfo && drawerState !== 'DataBase' && 
             <DCK driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} />}
 
           {
             userInfo && drawerState === 'Lushu' && (<div className='flex-arrangements'>
-              <Personal userInfo={userInfo}/>
+              <Personal userInfo={userInfo} />
               <Lushu driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} birthDate={userInfo.birthDate} />
               <Mobile userInfo={userInfo} driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} birthDate={userInfo.birthDate} />
-              
+
             </div>)
           }
 
 
-{userInfo &&
-            <Balancing userInfo={userInfo}/>}
+          {userInfo && drawerState === 'Lushu' &&
+            <Balancing userInfo={userInfo} />}
 
 
           {
@@ -133,7 +140,7 @@ function App(props) {
         </Fab>
 
       </div>
-     <InfoModal openModal={openModal} setOpenModal={setOpenModal} drawerState={drawerState} userInfo={userInfo} setUserInfo={setUserInfo}/>
+      <InfoModal openModal={openModal} setOpenModal={setOpenModal} drawerState={drawerState} userInfo={userInfo} setUserInfo={setUserInfo} />
     </>
   );
 }
