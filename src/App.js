@@ -133,7 +133,7 @@ function App(props) {
         </Fab>
 
       </div>
-     <InfoModal openModal={openModal} setOpenModal={setOpenModal} drawerState={drawerState} userInfo={userInfo} />
+     <InfoModal openModal={openModal} setOpenModal={setOpenModal} drawerState={drawerState} userInfo={userInfo} setUserInfo={setUserInfo}/>
     </>
   );
 }

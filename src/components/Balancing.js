@@ -1,5 +1,5 @@
 import '../BorderedCard.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { addAllNo, nameToNumber } from '../helper/balancing';
 import { addDigitsUntilSingle } from '../helper/calculation';
 
@@ -37,14 +37,14 @@ export default function Balancing({ userInfo }) {
             </div>
 
             <div className='bordered-card-container'>
-            <div className='bordered-card'>
+            <div className='bordered-card-blue'>
                     Overall name
                     <br />
                     <span className='big-no'>{addDigitsUntilSingle(addAllNo(nameToNumber(userInfo?.name))[0])}/{addAllNo(nameToNumber(userInfo?.name))[0]}</span>
 
                 </div>
 
-                <div className='bordered-card'>
+                <div className='bordered-card-blue'>
                     Overall name (without Middle name)
                     <br />
                     <span className='big-no'>{addDigitsUntilSingle(addAllNo(nameToNumber(userInfo?.name))[1])}/{addAllNo(nameToNumber(userInfo?.name))[1]}</span>

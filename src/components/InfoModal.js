@@ -28,7 +28,7 @@ const style = {
   borderRadius: '10px',
 };
 
-export default function InfoModal({ openModal, setOpenModal, drawerState, userInfo }) {
+export default function InfoModal({ openModal, setOpenModal, drawerState, userInfo, setUserInfo }) {
   const [formData, setFormData] = useState({
     name: userInfo?.name || '',
     birthDate: userInfo?.birthDate || '',
@@ -59,7 +59,8 @@ export default function InfoModal({ openModal, setOpenModal, drawerState, userIn
     else data.unshift(obj);
     localStorage.setItem("userInfo", JSON.stringify(data));
     setOpenModal(false);
-    window.location.reload();
+    // window.location.reload();
+    setUserInfo(obj);
   };
 
   useEffect(() => setShowWarning(''), [formData]);

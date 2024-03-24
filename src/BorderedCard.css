@@ -1,32 +1,51 @@
 .bordered-card-container {
-display: flex;
-justify-content: space-evenly;
-gap: 12px;
-    margin-top: 16px;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 12px;
+  margin-top: 40px;
 }
 
 .bordered-card {
-  border-radius: 16px 0px 16px 0px;
-  border: 6px solid #78c729;
-  padding: 16px;
-  }
+  border-radius: 20px 0px 20px 0px;
+  border: 16px solid #78c729;
+  padding: 50px 33px;
+  color: #fff;
+  font-size: 1.5em;
+}
+
+.bordered-card:nth-child(2) {
+  border: 16px solid #c72992;
+}
+
+.bordered-card:nth-child(3) {
+  border: 16px solid #e3c42b;
+}
+
+.bordered-card-blue {
+  border: 16px solid #293ec7;
+  border-radius: 20px 0px 20px 0px;
+  padding: 50px 33px;
+  color: #fff;
+  font-size: 1.5em;
+}
 
 
 @media only screen and (max-width: 1000px) {
-  
+  .bordered-card-container {
+    flex-direction: column;
+  }
 }
 
 
-@media only screen and (max-width: 600px) {
- 
-}
+@media only screen and (max-width: 600px) {}
 
 
 @keyframes slideUp {
-  0%{
+  0% {
     transform: translateY(100%);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
