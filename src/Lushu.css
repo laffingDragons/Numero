@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 30px;
+  animation: slideUp 3.5s ease-in;
 }
 
 table{
