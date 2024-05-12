@@ -122,7 +122,7 @@ function App(props) {
           Driver Conductor Relation
         </AccordionSummary>
         <AccordionDetails sx={{ background: '#c8ff92' , textDecoration:'capitalize'}}>
-          <div>{DCrelation(calcDriver({ userInfo })[0], calcConductor({ userInfo })[0])}</div>
+          <div style={{ textDecoration:'capitalize' }}>{DCrelation(calcDriver({ userInfo })[0], calcConductor({ userInfo })[0])}</div>
         </AccordionDetails>
       </Accordion>
       <Accordion>

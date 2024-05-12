@@ -19,7 +19,7 @@ export default function SideDrawer({sideDraweOpen, setSideDraweOpen, drawerState
       role="presentation"
       onClick={()=>setSideDraweOpen(false)}
       onKeyDown={()=>setSideDraweOpen(false)}
-      class='primary-dark-sidebar'
+      className='primary-dark-sidebar'
     >
       <List >
         {['Lushu'].map((text, index) => (

@@ -41,27 +41,27 @@ export default function DataBase({editData}) {
         <>
             <DialogBox title={dialogTitle} desc={dialogDesc} setOpen={setOpenDialog} open={openDialog} agree={agree} />
 
-            <div class="table100 ver6 m-b-110">
+            <div className="table100 ver6 m-b-110">
                 <table data-vertable="ver6">
                     <thead>
-                        <tr class="row100 head">
-                            <th class="column100 column1" data-column="column1">Name</th>
-                            <th class="column100 column2" data-column="column2">Brith Date</th>
-                            <th class="column100 column3" data-column="column3">Gender</th>
-                            <th class="column100 column4" data-column="column4">Phone</th>
-                            <th class="column100 column4" data-column="column5">Added on</th>
-                            <th class="column100 column5" data-column="column6"></th>
+                        <tr className="row100 head">
+                            <th className="column100 column1" data-column="column1">Name</th>
+                            <th className="column100 column2" data-column="column2">Brith Date</th>
+                            <th className="column100 column3" data-column="column3">Gender</th>
+                            <th className="column100 column4" data-column="column4">Phone</th>
+                            <th className="column100 column4" data-column="column5">Added on</th>
+                            <th className="column100 column5" data-column="column6"></th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        {userInfoArray.map((user, index) => (<tr class="row100" key={index} onClick={(e)=>{e.stopPropagation();editData(index, false)}}>
-                            <td class="column100 column1" data-column="column1">{user.name}</td>
-                            <td class="column100 column2" data-column="column2">{dayjs(user.birthDate).format("DD/MM/YYYY")}</td>
-                            <td class="column100 column3" data-column="column3">{user.gender}</td>
-                            <td class="column100 column4" data-column="column4">{user.mobile}</td>
-                            <td class="column100 column4" data-column="column4">{user.date ? dayjs(user.date).format("DD/MM/YYYY") : ''}</td>
-                            <td class="column100 column4" data-column="column4">
+                        {userInfoArray.map((user, index) => (<tr className="row100" key={index} onClick={(e)=>{e.stopPropagation();editData(index, false)}}>
+                            <td className="column100 column1" data-column="column1">{user.name}</td>
+                            <td className="column100 column2" data-column="column2">{dayjs(user.birthDate).format("DD/MM/YYYY")}</td>
+                            <td className="column100 column3" data-column="column3">{user.gender}</td>
+                            <td className="column100 column4" data-column="column4">{user.mobile}</td>
+                            <td className="column100 column4" data-column="column4">{user.date ? dayjs(user.date).format("DD/MM/YYYY") : ''}</td>
+                            <td className="column100 column4" data-column="column4">
                                 <IconButton title={`Edit ${user.name}`} onClick={(e)=>{e.stopPropagation();editData(index, true)}}><EditIcon /></IconButton> &nbsp; <IconButton><DeleteIcon onClick={(e)=>{e.stopPropagation();deleteUserAlert(user)}} /></IconButton></td>
                         </tr>))}
 

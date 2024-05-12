@@ -1,5 +1,4 @@
 
-
 export function DCrelation(driver, conductor) {
     let DC = [+driver,+conductor]
     let relationStatus = "neutral";
@@ -18,7 +17,6 @@ export function DCcareer (driver, conductor) {
     const conductorNumber = parseInt(conductor);
     const careerKey = `${driverNumber}${conductorNumber}`;
     const careerInfo = career[careerKey];
-    console.log('🚀___ ~ careerInfo_______ :', careerInfo);
 
     return {
         rating: careerInfo?.rating || '?',
