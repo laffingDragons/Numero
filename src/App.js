@@ -121,7 +121,7 @@ function App(props) {
         >
           Driver Conductor Relation
         </AccordionSummary>
-        <AccordionDetails sx={{ background: '#c8ff92' }}>
+        <AccordionDetails sx={{ background: '#c8ff92' , textDecoration:'capitalize'}}>
           <div>{DCrelation(calcDriver({ userInfo })[0], calcConductor({ userInfo })[0])}</div>
         </AccordionDetails>
       </Accordion>
@@ -133,7 +133,7 @@ function App(props) {
         >
           Occupations Suggestion
         </AccordionSummary>
-        <AccordionDetails sx={{ background: '#c8ff92' }}>
+        <AccordionDetails sx={{ background: '#c8ff92', textDecoration:'capitalize' }}>
           {ratingOcc(DCcareer(calcDriver({ userInfo })[0], calcConductor({ userInfo })[0]).rating)} <div>{DCcareer(calcDriver({ userInfo })[0], calcConductor({ userInfo })[0]).suitability}</div>
         </AccordionDetails>
       </Accordion>
