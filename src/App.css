@@ -302,6 +302,13 @@
   padding-bottom: 20px;
 }
 
+.AccordionSummary{
+  background: #c8ff92;
+}
+.AccordionDetails{
+  background: #c8ff92;
+}
+
 @keyframes slideUp {
   0%{
     transform: translateY(100%);

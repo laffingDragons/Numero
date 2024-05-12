@@ -13,9 +13,8 @@ table{
   border-radius: 10px;
   table-layout: fixed;
   margin: 16px 8px;
-  animation: slideUp 4s ease-in;
-
 }
+
 
 td{
   padding: 10px 20px;

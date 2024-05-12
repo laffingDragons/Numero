@@ -16,6 +16,14 @@ import Mobile from './pages/Mobile';
 import DataBase from './pages/DataBase';
 import Personal from './components/Personal';
 import Balancing from './components/Balancing';
+import { DCcareer, DCrelation } from './helper/suggestion';
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -67,10 +75,10 @@ function App(props) {
 
   const [sideDraweOpen, setSideDraweOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const userInfoArray = () =>{
-    if(localStorage.getItem("userInfo")){
+  const userInfoArray = () => {
+    if (localStorage.getItem("userInfo")) {
       return JSON.parse(localStorage.getItem("userInfo"));
-    }else{
+    } else {
       localStorage.setItem('userInfo', []);
       return [];
     }
@@ -94,13 +102,51 @@ function App(props) {
     if (edit) setOpenModal(true)
   }
 
+  const ratingOcc = (value) => (<Box
+    sx={{
+      '& > legend': { mt: 2 },
+    }}
+  >
+    <Rating name="read-only" value={value} readOnly />
+  </Box>);
+
+
+  const driverConductorRelation =
+    (<div style={{ margin: '20px' }}>
+      <Accordion >
+        <AccordionSummary sx={{ background: '#c8ff92' }}
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          Driver Conductor Relation
+        </AccordionSummary>
+        <AccordionDetails sx={{ background: '#c8ff92' }}>
+          <div>{DCrelation(calcDriver({ userInfo })[0], calcConductor({ userInfo })[0])}</div>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary sx={{ background: '#c8ff92' }}
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          Occupations Suggestion
+        </AccordionSummary>
+        <AccordionDetails sx={{ background: '#c8ff92' }}>
+          {ratingOcc(DCcareer(calcDriver({ userInfo })[0], calcConductor({ userInfo })[0]).rating)} <div>{DCcareer(calcDriver({ userInfo })[0], calcConductor({ userInfo })[0]).suitability}</div>
+        </AccordionDetails>
+      </Accordion>
+    </div>);
+
+
   return (
     <>
       <div className="App" id='back-to-top-anchor'>
         <ButtonAppBar sideDraweOpen={sideDraweOpen} setSideDraweOpen={setSideDraweOpen} userInfo={userInfo} setOpenModal={setOpenModal} drawerState={drawerState} setDrawerState={setDrawerState} />
 
         <div className='color-bg'>
-          {userInfo && drawerState !== 'DataBase' && 
+          {userInfo && drawerState !== 'DataBase' &&
             <DCK driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} />}
 
           {
@@ -108,7 +154,6 @@ function App(props) {
               <Personal userInfo={userInfo} />
               <Lushu driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} birthDate={userInfo.birthDate} />
               <Mobile userInfo={userInfo} driver={calcDriver({ userInfo })} conductor={calcConductor({ userInfo })} kua={calcKua({ userInfo })} birthDate={userInfo.birthDate} />
-
             </div>)
           }
 
@@ -116,10 +161,13 @@ function App(props) {
           {userInfo && drawerState === 'Lushu' &&
             <Balancing userInfo={userInfo} />}
 
+          {drawerState === 'Lushu' && driverConductorRelation}
 
           {
             userInfo && drawerState === 'DataBase' && <DataBase editData={editData} />
           }
+
+
         </div>
 
         <ScrollTop {...props}>
